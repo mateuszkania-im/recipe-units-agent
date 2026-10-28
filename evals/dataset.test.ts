@@ -5,8 +5,9 @@ import { convertMeasure } from '../src/units/index.ts';
 import { TAGS } from './cases.ts';
 import { buildDataset, DATASET_PATH, loadDataset, serializeDataset } from './dataset.ts';
 
+const rows = loadDataset();
+
 describe('evals/dataset.jsonl', () => {
-  const rows = loadDataset();
 
   it('has 60 valid cases with unique ids', () => {
     expect(rows).toHaveLength(60);
@@ -48,13 +49,23 @@ describe('few-shot examples', () => {
     const measures = [
       convertMeasure({ kind: 'mass', grams: 350 }, 'floury potatoes'),
       convertMeasure({ kind: 'mass', grams: 75 }, 'unsalted butter'),
+      convertMeasure({ kind: 'mass', grams: 150 }, 'wholemeal flour'),
+      convertMeasure({ kind: 'mass', grams: { min: 300, max: 350 } }, 'green beans'),
       convertMeasure({ kind: 'volume', ml: 200, packaged: true }),
       convertMeasure({ kind: 'temperature', celsius: 160, context: 'oven' }),
       convertMeasure({ kind: 'count', count: 3 }),
     ];
+    expect(FEW_SHOT_EXAMPLES).toHaveLength(measures.length);
     FEW_SHOT_EXAMPLES.forEach((example, i) => {
-      expect(example.output.quantity).toBe(measures[i]?.quantity);
+      expect(example.output.quantity).toEqual(measures[i]?.quantity);
       expect(example.output.unit).toBe(measures[i]?.unit);
     });
+  });
+
+  it('use ingredients that do not appear anywhere in the eval set', () => {
+    const inputs = rows.map((r) => r.input.toLowerCase()).join('\n');
+    for (const word of ['floury', 'wholemeal', 'green beans', 'coconut cream', 'garlic']) {
+      expect(inputs.includes(word), word).toBe(false);
+    }
   });
 });

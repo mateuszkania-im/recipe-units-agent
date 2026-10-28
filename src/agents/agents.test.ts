@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildPrompt } from './convert.ts';
 import { createConversionAgent, VARIANT_IDS, VARIANTS } from './index.ts';
-import { convertMassTool, densityLookupTool } from './tools.ts';
+import { convertMassTool, densityLookupTool, densityTools, naiveUnitTools, unitTools } from './tools.ts';
 
 describe('variants', () => {
   it('builds an agent for every variant without calling a model', () => {
@@ -13,10 +13,26 @@ describe('variants', () => {
 
   it('adds tools step by step', () => {
     expect(Object.keys(VARIANTS.baseline.tools)).toHaveLength(0);
-    expect(Object.keys(VARIANTS.tools.tools)).toHaveLength(4);
+    expect(VARIANTS.tools.tools).toBe(naiveUnitTools);
+    expect(VARIANTS['tools-policy'].tools).toBe(unitTools);
     expect(Object.keys(VARIANTS['tools-density'].tools)).toHaveLength(5);
     expect(VARIANTS['few-shot'].tools).toBe(VARIANTS['tools-density'].tools);
     expect(VARIANTS['few-shot'].instructions).toContain('Examples');
+  });
+
+  it('keeps the baseline and naive tools prompts free of the later policy', () => {
+    for (const id of ['baseline', 'tools'] as const) expect(VARIANTS[id].instructions).not.toContain('target unit');
+    for (const id of ['tools-policy', 'tools-density', 'few-shot'] as const) {
+      expect(VARIANTS[id].instructions).toContain('decide the target unit');
+    }
+  });
+
+  it('exposes policy tools under the names the instructions use', () => {
+    for (const id of ['tools-policy', 'tools-density', 'few-shot'] as const) {
+      const mentioned = new Set(VARIANTS[id].instructions.match(/convert-[a-z-]+[a-z]/g));
+      for (const name of mentioned) expect(Object.keys(VARIANTS[id].tools), `${id}: ${name}`).toContain(name);
+    }
+    for (const [name, tool] of Object.entries({ ...unitTools, ...densityTools })) expect(tool.id).toBe(name);
   });
 });
 

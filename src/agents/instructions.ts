@@ -22,6 +22,32 @@ Rules:
 - Return exactly one output line per input line, in the same order, with original copied verbatim.
 `.trim();
 
+/** First-generation tool guidance, kept for the naive `tools` variant. */
 export const TOOL_GUIDANCE = `
 Do not do unit arithmetic yourself. Parse each line, call the matching conversion tool, and copy its quantity and unit into your answer.
+`.trim();
+
+/**
+ * Second-generation guidance. The first version told the model to copy the
+ * tool's unit, which conflicts with the rules whenever the only tool that
+ * accepts grams (convert-mass) returns oz for flour or butter. Deciding the
+ * target unit first removes the conflict (docs/error-analysis.md).
+ */
+export const TARGET_UNIT_POLICY = `
+How to use the tools:
+1. First decide the target unit from the rules, before choosing a tool:
+   - Baking staples given by weight (flour, sugar, cocoa, ground almonds, oats, rice, honey, maple syrup, milk): cup, tbsp or tsp. Never oz or lb.
+   - Butter given by weight: tbsp, even when it is a whole number of cups.
+   - Tins, cans, packs, cartons and bottles: the package size in oz (weight) or fl oz (liquid).
+   - Any other ingredient given by weight (meat, fish, vegetables, fruit, cheese, chocolate, nuts): oz or lb.
+   - Liquids given in ml or litres: tsp, tbsp or cup.
+   - Oven and other temperatures: °F. Tin sizes: inch.
+   - Counted items, pinches, and amounts already in tsp or tbsp: no tool. Keep the number; the unit is count, pinch, tsp or tbsp.
+2. Call the tool that produces that target unit and copy its quantity and unit.
+3. If a tool returns a unit that is not your target, do not copy it; the wrong tool was used.
+`.trim();
+
+/** How the tool-only variant reaches volume without a density table. */
+export const NO_DENSITY_FALLBACK = `
+There is no density tool. For a baking staple given by weight, estimate its volume in ml from the typical grams per US cup you know for that ingredient, then call convert-volume with that ml so the rounding is consistent. For butter, 1 tbsp is about 14.2 g: divide and round to the nearest 1/2 tbsp yourself.
 `.trim();

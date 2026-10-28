@@ -11,6 +11,8 @@ providers:
   - { id: file://evals/promptfoo/provider.ts, label: baseline/strong, config: { variant: baseline, model: strong } }
   - { id: file://evals/promptfoo/provider.ts, label: tools/cheap, config: { variant: tools, model: cheap } }
   - { id: file://evals/promptfoo/provider.ts, label: tools/strong, config: { variant: tools, model: strong } }
+  - { id: file://evals/promptfoo/provider.ts, label: tools-policy/cheap, config: { variant: tools-policy, model: cheap } }
+  - { id: file://evals/promptfoo/provider.ts, label: tools-policy/strong, config: { variant: tools-policy, model: strong } }
   - { id: file://evals/promptfoo/provider.ts, label: tools-density/cheap, config: { variant: tools-density, model: cheap } }
   - { id: file://evals/promptfoo/provider.ts, label: tools-density/strong, config: { variant: tools-density, model: strong } }
   - { id: file://evals/promptfoo/provider.ts, label: few-shot/cheap, config: { variant: few-shot, model: cheap } }

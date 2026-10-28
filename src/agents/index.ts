@@ -2,6 +2,7 @@ import { Agent } from '@mastra/core/agent';
 import { baseline } from './variants/baseline.ts';
 import { fewShot } from './variants/few-shot.ts';
 import { toolsDensity } from './variants/tools-density.ts';
+import { toolsPolicy } from './variants/tools-policy.ts';
 import { tools } from './variants/tools.ts';
 import { VARIANT_IDS, type VariantConfig, type VariantId } from './types.ts';
 
@@ -10,6 +11,7 @@ export { VARIANT_IDS, type VariantConfig, type VariantId };
 export const VARIANTS: Record<VariantId, VariantConfig> = {
   baseline,
   tools,
+  'tools-policy': toolsPolicy,
   'tools-density': toolsDensity,
   'few-shot': fewShot,
 };
