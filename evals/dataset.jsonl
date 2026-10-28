@@ -1,0 +1,60 @@
+{"id":"mass-01","input":"800g new potatoes, halved","expected":{"quantity":1.75,"unit":"lb","ingredient":"new potatoes"},"tags":["mass","fraction"]}
+{"id":"mass-02","input":"1kg beef brisket","expected":{"quantity":2.25,"unit":"lb","ingredient":"beef brisket"},"tags":["mass","fraction"]}
+{"id":"mass-03","input":"200g cherry tomatoes, halved","expected":{"quantity":7,"unit":"oz","ingredient":"cherry tomatoes"},"tags":["mass"]}
+{"id":"mass-04","input":"100g feta, crumbled","expected":{"quantity":3.5,"unit":"oz","ingredient":"feta"},"tags":["mass","fraction"]}
+{"id":"mass-05","input":"500g lean beef mince","expected":{"quantity":1,"unit":"lb","ingredient":"ground beef"},"tags":["mass"]}
+{"id":"mass-06","input":"250g chestnut mushrooms, sliced","expected":{"quantity":9,"unit":"oz","ingredient":"mushrooms"},"tags":["mass"]}
+{"id":"mass-07","input":"2kg leg of lamb, bone in","expected":{"quantity":4.5,"unit":"lb","ingredient":"leg of lamb"},"tags":["mass","fraction"]}
+{"id":"mass-08","input":"150g smoked salmon trimmings","expected":{"quantity":5.5,"unit":"oz","ingredient":"smoked salmon"},"tags":["mass","fraction"]}
+{"id":"mass-09","input":"30g parmesan, finely grated","expected":{"quantity":1,"unit":"oz","ingredient":"parmesan"},"tags":["mass"]}
+{"id":"mass-10","input":"1.2kg whole chicken","expected":{"quantity":2.75,"unit":"lb","ingredient":"whole chicken"},"tags":["mass","fraction"]}
+{"id":"mass-11","input":"75g dark chocolate, roughly chopped","expected":{"quantity":2.5,"unit":"oz","ingredient":"dark chocolate"},"tags":["mass","fraction"]}
+{"id":"mass-12","input":"10g fresh ginger, grated","expected":{"quantity":0.25,"unit":"oz","ingredient":"fresh ginger"},"tags":["mass","fraction","ambiguous"]}
+{"id":"mass-13","input":"600g butternut squash, peeled and cubed","expected":{"quantity":1.25,"unit":"lb","ingredient":"butternut squash"},"tags":["mass","fraction"]}
+{"id":"mass-14","input":"400g courgettes, sliced","expected":{"quantity":14,"unit":"oz","ingredient":"zucchini"},"tags":["mass"]}
+{"id":"density-01","input":"250g plain flour","expected":{"quantity":2,"unit":"cup","ingredient":"all-purpose flour"},"tags":["density","mass"]}
+{"id":"density-02","input":"200g caster sugar","expected":{"quantity":1,"unit":"cup","ingredient":"superfine sugar"},"tags":["density","mass"]}
+{"id":"density-03","input":"175g self-raising flour","expected":{"quantity":1.3333,"unit":"cup","ingredient":"self-rising flour"},"tags":["density","mass","fraction"]}
+{"id":"density-04","input":"100g light brown soft sugar","expected":{"quantity":0.5,"unit":"cup","ingredient":"brown sugar"},"tags":["density","mass","fraction"]}
+{"id":"density-05","input":"50g cocoa powder, sifted","expected":{"quantity":0.6667,"unit":"cup","ingredient":"cocoa powder"},"tags":["density","mass","fraction"]}
+{"id":"density-06","input":"100g porridge oats","expected":{"quantity":1,"unit":"cup","ingredient":"rolled oats"},"tags":["density","mass"]}
+{"id":"density-07","input":"300g basmati rice, rinsed","expected":{"quantity":1.6667,"unit":"cup","ingredient":"basmati rice"},"tags":["density","mass","fraction"]}
+{"id":"density-08","input":"100g ground almonds","expected":{"quantity":1,"unit":"cup","ingredient":"almond flour"},"tags":["density","mass"]}
+{"id":"density-09","input":"125g icing sugar, plus extra for dusting","expected":{"quantity":1,"unit":"cup","ingredient":"powdered sugar"},"tags":["density","mass"]}
+{"id":"density-10","input":"500g strong white bread flour","expected":{"quantity":3.75,"unit":"cup","ingredient":"bread flour"},"tags":["density","mass","fraction"]}
+{"id":"density-11","input":"15g caster sugar","expected":{"quantity":1,"unit":"tbsp","ingredient":"superfine sugar"},"tags":["density","mass"]}
+{"id":"density-12","input":"60g honey","expected":{"quantity":3,"unit":"tbsp","ingredient":"honey"},"tags":["density","mass"]}
+{"id":"density-13","input":"350g granulated sugar","expected":{"quantity":1.75,"unit":"cup","ingredient":"granulated sugar"},"tags":["density","mass","fraction"]}
+{"id":"density-14","input":"250g unsalted butter, softened","expected":{"quantity":17.5,"unit":"tbsp","note":"about 2 1/4 sticks","ingredient":"unsalted butter"},"tags":["density","mass","fraction"]}
+{"id":"density-15","input":"115g butter, at room temperature","expected":{"quantity":8,"unit":"tbsp","note":"about 1 stick","ingredient":"butter"},"tags":["density","mass"]}
+{"id":"density-16","input":"a 25g knob of butter","expected":{"quantity":2,"unit":"tbsp","ingredient":"butter"},"tags":["density","mass","ambiguous"]}
+{"id":"density-17","input":"50g salted butter, cubed","expected":{"quantity":3.5,"unit":"tbsp","note":"about 1/2 stick","ingredient":"salted butter"},"tags":["density","mass","fraction"]}
+{"id":"volume-01","input":"250ml whole milk","expected":{"quantity":1,"unit":"cup","ingredient":"whole milk"},"tags":["volume"]}
+{"id":"volume-02","input":"100ml double cream","expected":{"quantity":0.5,"unit":"cup","ingredient":"heavy cream"},"tags":["volume","fraction"]}
+{"id":"volume-03","input":"150ml hot vegetable stock","expected":{"quantity":0.6667,"unit":"cup","ingredient":"vegetable stock"},"tags":["volume","fraction"]}
+{"id":"volume-04","input":"1 litre chicken stock","expected":{"quantity":4.25,"unit":"cup","ingredient":"chicken stock"},"tags":["volume","fraction"]}
+{"id":"volume-05","input":"30ml runny honey","expected":{"quantity":2,"unit":"tbsp","ingredient":"honey"},"tags":["volume","ambiguous"]}
+{"id":"volume-06","input":"5ml vanilla extract","expected":{"quantity":1,"unit":"tsp","ingredient":"vanilla extract"},"tags":["volume"]}
+{"id":"volume-07","input":"75ml maple syrup","expected":{"quantity":0.3333,"unit":"cup","ingredient":"maple syrup"},"tags":["volume","fraction"]}
+{"id":"volume-08","input":"1 x 400ml can coconut milk","expected":{"quantity":13.5,"unit":"fl oz","ingredient":"coconut milk"},"tags":["volume","fraction","ambiguous"]}
+{"id":"volume-09","input":"330ml bottle of lager","expected":{"quantity":11,"unit":"fl oz","ingredient":"lager"},"tags":["volume","ambiguous"]}
+{"id":"volume-10","input":"50ml fresh lemon juice","expected":{"quantity":3.5,"unit":"tbsp","ingredient":"lemon juice"},"tags":["volume","fraction"]}
+{"id":"pack-01","input":"1 x 400g tin chopped tomatoes","expected":{"quantity":14,"unit":"oz","ingredient":"chopped tomatoes"},"tags":["mass","ambiguous"]}
+{"id":"pack-02","input":"400g can chickpeas, drained and rinsed","expected":{"quantity":14,"unit":"oz","ingredient":"chickpeas"},"tags":["mass","ambiguous"]}
+{"id":"pack-03","input":"1 x 227g tin pineapple chunks in juice","expected":{"quantity":8,"unit":"oz","ingredient":"pineapple chunks"},"tags":["mass","ambiguous"]}
+{"id":"range-01","input":"200-250g plain flour","expected":{"quantity":{"min":1.6667,"max":2},"unit":"cup","ingredient":"all-purpose flour"},"tags":["range","density","mass","fraction"]}
+{"id":"range-02","input":"600-700g sweet potatoes","expected":{"quantity":{"min":1.25,"max":1.5},"unit":"lb","ingredient":"sweet potatoes"},"tags":["range","mass","fraction"]}
+{"id":"range-03","input":"100-150ml milk","expected":{"quantity":{"min":0.5,"max":0.6667},"unit":"cup","ingredient":"milk"},"tags":["range","volume","fraction"]}
+{"id":"range-04","input":"2-3 tbsp soy sauce","expected":{"quantity":{"min":2,"max":3},"unit":"tbsp","ingredient":"soy sauce"},"tags":["range","no-conversion"]}
+{"id":"temp-01","input":"Heat oven to 180C/160C fan/gas 4","expected":{"quantity":350,"unit":"°F","ingredient":"oven"},"tags":["temperature"]}
+{"id":"temp-02","input":"Preheat the oven to 200C/180C fan/gas 6","expected":{"quantity":400,"unit":"°F","ingredient":"oven"},"tags":["temperature"]}
+{"id":"temp-03","input":"Bake at 220C (200C fan) for 25 mins","expected":{"quantity":425,"unit":"°F","ingredient":"oven"},"tags":["temperature"]}
+{"id":"temp-04","input":"Set the oven to gas mark 5","expected":{"quantity":375,"unit":"°F","ingredient":"oven"},"tags":["temperature","ambiguous"]}
+{"id":"temp-05","input":"Heat the oil in a deep pan to 180C","expected":{"quantity":355,"unit":"°F","ingredient":"oil"},"tags":["temperature","ambiguous"]}
+{"id":"temp-06","input":"Heat oven to 140C/120C fan/gas 1","expected":{"quantity":275,"unit":"°F","ingredient":"oven"},"tags":["temperature"]}
+{"id":"length-01","input":"Grease and line a 23cm round cake tin","expected":{"quantity":9,"unit":"inch","ingredient":"round cake tin"},"tags":["length"]}
+{"id":"length-02","input":"a 20cm square baking tin","expected":{"quantity":8,"unit":"inch","ingredient":"square baking tin"},"tags":["length"]}
+{"id":"none-01","input":"2 large eggs","expected":{"quantity":2,"unit":"count","ingredient":"large eggs"},"tags":["no-conversion"]}
+{"id":"none-02","input":"a pinch of sea salt","expected":{"quantity":1,"unit":"pinch","ingredient":"sea salt"},"tags":["no-conversion","ambiguous"]}
+{"id":"none-03","input":"1 red onion, finely chopped","expected":{"quantity":1,"unit":"count","ingredient":"red onion"},"tags":["no-conversion"]}
+{"id":"none-04","input":"3 tbsp crème fraîche","expected":{"quantity":3,"unit":"tbsp","ingredient":"crème fraîche"},"tags":["no-conversion"]}

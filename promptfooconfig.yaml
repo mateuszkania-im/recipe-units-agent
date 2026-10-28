@@ -1,0 +1,24 @@
+# Optional Promptfoo view of the same eval: every variant x model over
+# evals/dataset.jsonl, scored by evals/scorers.ts. Promptfoo records latency,
+# token usage and cost per test. Run with: npm run eval:promptfoo
+# The primary runner is evals/run.ts (npm run eval).
+description: Recipe metric to US units conversion
+prompts:
+  - '{{input}}'
+
+providers:
+  - { id: file://evals/promptfoo/provider.ts, label: baseline/cheap, config: { variant: baseline, model: cheap } }
+  - { id: file://evals/promptfoo/provider.ts, label: baseline/strong, config: { variant: baseline, model: strong } }
+  - { id: file://evals/promptfoo/provider.ts, label: tools/cheap, config: { variant: tools, model: cheap } }
+  - { id: file://evals/promptfoo/provider.ts, label: tools/strong, config: { variant: tools, model: strong } }
+  - { id: file://evals/promptfoo/provider.ts, label: tools-density/cheap, config: { variant: tools-density, model: cheap } }
+  - { id: file://evals/promptfoo/provider.ts, label: tools-density/strong, config: { variant: tools-density, model: strong } }
+  - { id: file://evals/promptfoo/provider.ts, label: few-shot/cheap, config: { variant: few-shot, model: cheap } }
+  - { id: file://evals/promptfoo/provider.ts, label: few-shot/strong, config: { variant: few-shot, model: strong } }
+
+tests: file://evals/promptfoo/tests.ts
+
+evaluateOptions:
+  maxConcurrency: 4
+
+outputPath: promptfoo-output/results.json

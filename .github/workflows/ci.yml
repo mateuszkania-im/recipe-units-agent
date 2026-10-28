@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Typecheck, lint, unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+
+  evals:
+    name: Evals (only when a model API key secret exists)
+    needs: check
+    runs-on: ubuntu-latest
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+      LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+    steps:
+      - name: Check for model credentials
+        id: keys
+        run: |
+          if [ -n "${OPENROUTER_API_KEY}${ANTHROPIC_API_KEY}" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No OPENROUTER_API_KEY or ANTHROPIC_API_KEY secret, skipping evals."
+          fi
+      - if: steps.keys.outputs.enabled == 'true'
+        uses: actions/checkout@v4
+      - if: steps.keys.outputs.enabled == 'true'
+        uses: pnpm/action-setup@v4
+      - if: steps.keys.outputs.enabled == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - if: steps.keys.outputs.enabled == 'true'
+        run: pnpm install --frozen-lockfile
+      - if: steps.keys.outputs.enabled == 'true'
+        run: pnpm eval
+      - if: steps.keys.outputs.enabled == 'true'
+        name: Publish summary
+        run: cat results/*/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - if: steps.keys.outputs.enabled == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: results/

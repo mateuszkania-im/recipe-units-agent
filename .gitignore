@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+results/*
+!results/.gitkeep
+.promptfoo/
+promptfoo-output/
+promptfoo-results*.json
+*.log
+.DS_Store
+coverage/

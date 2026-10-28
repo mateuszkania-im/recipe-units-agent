@@ -1,0 +1,46 @@
+{
+  "name": "recipe-units-agent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An agent that converts recipes from metric to US units, with an eval set, a baseline and measured variants.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "dataset:build": "tsx evals/build-dataset.ts",
+    "eval": "tsx evals/run.ts",
+    "eval:baseline": "tsx evals/run.ts --variant baseline",
+    "eval:promptfoo": "npx --yes promptfoo@0.125.1 eval -c promptfooconfig.yaml"
+  },
+  "dependencies": {
+    "@mastra/core": "^1.80.0",
+    "@mastra/langfuse": "^1.6.3",
+    "@mastra/observability": "^1.22.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.5",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.0.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ],
+    "ignoredBuiltDependencies": [
+      "protobufjs"
+    ]
+  },
+  "packageManager": "pnpm@10.11.0"
+}
