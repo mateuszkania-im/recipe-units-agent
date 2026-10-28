@@ -12,6 +12,7 @@ import type { ConversionOutput } from '../../src/schema.ts';
 
 interface ProviderOptions {
   id?: string;
+  label?: string;
   config?: { variant?: string; model?: string };
 }
 
@@ -31,10 +32,12 @@ export default class RecipeUnitsProvider {
   constructor(options: ProviderOptions) {
     const variant = options.config?.variant ?? 'baseline';
     if (!isVariantId(variant)) throw new Error(`Unknown variant "${variant}"`);
-    this.model = resolveModel(options.config?.model ?? 'cheap');
+    const tier = options.config?.model ?? 'cheap';
+    this.model = resolveModel(tier);
     this.agent = createConversionAgent(variant, this.model);
     createMastra({ [this.agent.id]: this.agent });
-    this.label = options.id ?? `${variant}:${this.model}`;
+    // options.id is the file:// path; a variant/tier id makes --filter-providers work.
+    this.label = options.label ?? `${variant}/${tier}`;
   }
 
   id(): string {
