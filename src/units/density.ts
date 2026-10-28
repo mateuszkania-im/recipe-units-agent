@@ -23,7 +23,7 @@ export const DENSITY_TABLE: readonly DensityEntry[] = [
   { name: 'brown sugar', gramsPerCup: 220, aliases: ['light brown soft sugar', 'dark brown soft sugar', 'light brown sugar', 'dark brown sugar', 'soft brown sugar', 'muscovado sugar', 'brown sugar'], measuredIn: 'cup' },
   { name: 'powdered sugar', gramsPerCup: 120, aliases: ['icing sugar', 'powdered sugar', "confectioners' sugar"], measuredIn: 'cup' },
   { name: 'unsweetened cocoa powder', gramsPerCup: 85, aliases: ['cocoa powder', 'cocoa'], measuredIn: 'cup' },
-  { name: 'almond flour', gramsPerCup: 96, aliases: ['ground almonds', 'almond flour'], measuredIn: 'cup' },
+  { name: 'almond flour', gramsPerCup: 96, aliases: ['ground almonds', 'almond flour', 'almond meal'], measuredIn: 'cup' },
   { name: 'rolled oats', gramsPerCup: 90, aliases: ['porridge oats', 'rolled oats', 'oats'], measuredIn: 'cup' },
   { name: 'long-grain rice', gramsPerCup: 185, aliases: ['basmati rice', 'long-grain rice', 'jasmine rice', 'rice'], measuredIn: 'cup' },
   { name: 'butter', gramsPerCup: 227, aliases: ['unsalted butter', 'salted butter', 'butter'], measuredIn: 'tbsp' },

@@ -18,14 +18,16 @@ describe('toMarkdown', () => {
         variant: 'baseline',
         model: 'anthropic/claude-haiku-5-5',
         accuracy: { overall: accuracy, byTag: { mass: accuracy } },
+        bySplit: { tune: accuracy },
         errors: 0,
         totalCostUsd: 0.0012,
         latencyMs: { p50: 800, p95: 1200 },
         avgToolCalls: 0,
       },
     ]);
-    expect(md).toContain('| baseline | anthropic/claude-haiku-5-5 | 50.0% |');
+    expect(md).toContain('| baseline | anthropic/claude-haiku-5-5 | 50.0% | 50.0% (n=2) | - |');
     expect(md).toContain('$0.0012');
+    expect(md).toContain('$0.0600');
     expect(md).toContain('| Variant | Model | mass |');
   });
 });

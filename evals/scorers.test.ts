@@ -17,6 +17,8 @@ describe('ingredientMatches', () => {
     expect(ingredientMatches('heavy cream', 'double cream')).toBe(true);
     expect(ingredientMatches('zucchini', 'courgettes')).toBe(true);
     expect(ingredientMatches('almond flour', 'ground almonds')).toBe(true);
+    expect(ingredientMatches('almond flour', 'almond meal')).toBe(true);
+    expect(ingredientMatches('chicken stock', 'chicken broth')).toBe(true);
   });
 
   it('accepts a shorter or longer phrase of the same item', () => {
@@ -62,6 +64,14 @@ describe('scoreCase', () => {
     const range = { quantity: { min: 1.6667, max: 2 }, unit: 'cup' as const, ingredient: 'flour' };
     expect(scoreCase(range, line({ quantity: 2 })).pass).toBe(false);
     expect(scoreCase(range, line({ quantity: { min: 1.75, max: 2 } })).pass).toBe(true);
+  });
+
+  it('accepts an answer close to the unrounded value when the reference rounds away from it', () => {
+    const flour = { quantity: { min: 1.6667, max: 2 }, exact: { min: 1.6, max: 2 }, unit: 'cup' as const, ingredient: 'flour' };
+    expect(scoreCase(flour, line({ quantity: { min: 1.5, max: 2 } })).pass).toBe(true);
+    const cream = { quantity: 0.5, exact: 0.4227, unit: 'cup' as const, ingredient: 'heavy cream' };
+    expect(scoreCase(cream, line({ quantity: 0.4, ingredient: 'heavy cream' })).pass).toBe(true);
+    expect(scoreCase(cream, line({ quantity: 1 / 3, ingredient: 'heavy cream' })).pass).toBe(false);
   });
 
   it('fails a missing line', () => {

@@ -1,9 +1,9 @@
-import { ML_PER_CUP, ML_PER_TBSP } from './constants.ts';
+import { CM_PER_INCH, GRAMS_PER_LB, GRAMS_PER_OZ, ML_PER_CUP, ML_PER_FL_OZ, ML_PER_TBSP, ML_PER_TSP } from './constants.ts';
 import { lookupDensity } from './density.ts';
 import { formatQuantity, roundToStep } from './fractions.ts';
 import { cmToInches, type LengthContext } from './length.ts';
 import { massUnitFor, quantizeMass } from './mass.ts';
-import { convertCelsius, gasMarkToFahrenheit, type TemperatureContext } from './temperature.ts';
+import { celsiusToFahrenheit, convertCelsius, gasMarkToFahrenheit, type TemperatureContext } from './temperature.ts';
 import { quantizeVolume, volumeUnitFor } from './volume.ts';
 import type { Quantity, USUnit } from '../schema.ts';
 
@@ -80,5 +80,42 @@ export function convertMeasure(measure: MetricMeasure, ingredient = ''): USMeasu
       return { quantity: measure.count, unit: 'count' };
     case 'pinch':
       return { quantity: measure.count, unit: 'pinch' };
+  }
+}
+
+const ML_PER_UNIT: Partial<Record<USUnit, number>> = { tsp: ML_PER_TSP, tbsp: ML_PER_TBSP, cup: ML_PER_CUP, 'fl oz': ML_PER_FL_OZ };
+
+function mlIn(unit: USUnit, ml: number): number {
+  const factor = ML_PER_UNIT[unit];
+  if (factor === undefined) throw new RangeError(`${unit} is not a volume unit`);
+  return ml / factor;
+}
+
+/**
+ * The same conversion without kitchen rounding, in the unit `convertMeasure`
+ * picks. The scorer uses it so an answer is not penalised for being closer to
+ * the true amount than the rounded reference (100 ml is 0.42 cup, which the
+ * reference rounds to 1/2).
+ */
+export function convertMeasureExact(measure: MetricMeasure, ingredient = ''): USMeasure {
+  const { unit } = convertMeasure(measure, ingredient);
+  switch (measure.kind) {
+    case 'mass': {
+      const density = measure.packaged ? undefined : lookupDensity(ingredient);
+      const toUnit = density
+        ? (g: number) => mlIn(unit, (g / density.gramsPerCup) * ML_PER_CUP)
+        : (g: number) => g / (unit === 'lb' ? GRAMS_PER_LB : GRAMS_PER_OZ);
+      return { quantity: mapQuantity(measure.grams, toUnit), unit };
+    }
+    case 'volume':
+      return { quantity: mapQuantity(measure.ml, (ml) => mlIn(unit, ml)), unit };
+    case 'temperature':
+      return { quantity: celsiusToFahrenheit(measure.celsius), unit };
+    case 'length':
+      return { quantity: measure.cm / CM_PER_INCH, unit };
+    case 'gas-mark':
+    case 'count':
+    case 'pinch':
+      return convertMeasure(measure, ingredient);
   }
 }

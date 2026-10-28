@@ -16,6 +16,7 @@
     "dataset:build": "tsx evals/build-dataset.ts",
     "eval": "tsx --env-file-if-exists=.env evals/run.ts",
     "eval:baseline": "tsx --env-file-if-exists=.env evals/run.ts --variant baseline",
+    "eval:rescore": "tsx evals/rescore.ts",
     "eval:promptfoo": "npx --yes promptfoo@0.125.1 eval -c promptfooconfig.yaml"
   },
   "dependencies": {

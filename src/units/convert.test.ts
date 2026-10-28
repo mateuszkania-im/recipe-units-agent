@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { convertMeasure } from './convert.ts';
+import { convertMeasure, convertMeasureExact } from './convert.ts';
 
 describe('convertMeasure', () => {
   it('converts 800 g potatoes to 1 3/4 lb', () => {
@@ -46,5 +46,31 @@ describe('convertMeasure', () => {
 
   it('leaves counts alone', () => {
     expect(convertMeasure({ kind: 'count', count: 2 }, 'large eggs')).toEqual({ quantity: 2, unit: 'count' });
+  });
+});
+
+describe('convertMeasureExact', () => {
+  it('keeps the reference unit but skips rounding', () => {
+    expect(convertMeasureExact({ kind: 'volume', ml: 100 })).toMatchObject({ unit: 'cup' });
+    expect(convertMeasureExact({ kind: 'volume', ml: 100 }).quantity).toBeCloseTo(0.4227, 4);
+    expect(convertMeasureExact({ kind: 'mass', grams: 800 }, 'potatoes').quantity).toBeCloseTo(1.7637, 4);
+  });
+
+  it('applies density for baking staples and butter', () => {
+    expect(convertMeasureExact({ kind: 'mass', grams: 200 }, 'plain flour').quantity).toBeCloseTo(1.6, 6);
+    const butter = convertMeasureExact({ kind: 'mass', grams: 113.5 }, 'butter');
+    expect(butter.unit).toBe('tbsp');
+    expect(butter.quantity).toBeCloseTo(8, 6);
+  });
+
+  it('converts both ends of a range', () => {
+    const { quantity } = convertMeasureExact({ kind: 'mass', grams: { min: 200, max: 250 } }, 'plain flour');
+    expect(quantity).toEqual({ min: 1.6, max: 2 });
+  });
+
+  it('leaves temperatures and lengths unrounded and gas marks as the table value', () => {
+    expect(convertMeasureExact({ kind: 'temperature', celsius: 180, context: 'oven' }).quantity).toBe(356);
+    expect(convertMeasureExact({ kind: 'length', cm: 23, context: 'tin' }).quantity).toBeCloseTo(9.055, 3);
+    expect(convertMeasureExact({ kind: 'gas-mark', mark: 4 }).quantity).toBe(350);
   });
 });

@@ -13,6 +13,8 @@ const SYNONYMS: readonly (readonly [RegExp, string])[] = [
   [/\bspring onions?\b/, 'scallions'],
   [/\bpan\b/, 'tin'],
   [/\bbeer\b/, 'lager'],
+  // US recipes use broth and stock interchangeably for the boxed product.
+  [/\bbroth\b/, 'stock'],
 ];
 
 const STOPWORDS = new Set(['of', 'a', 'an', 'the', 'and', 'fresh', 'in']);
@@ -44,23 +46,31 @@ export function ingredientMatches(expected: string, predicted: string): boolean 
  * cups), so mass and volume allow 10 percent; temperatures allow 10 °F and
  * lengths half an inch.
  */
-export function withinTolerance(expected: number, predicted: number, unit: USUnit): boolean {
+export function withinTolerance(expected: number, predicted: number, unit: USUnit, { exact = false } = {}): boolean {
   const diff = Math.abs(expected - predicted);
   if (unit === '°F') return diff <= 10;
   if (unit === 'inch') return diff <= 0.5;
   if (unit === 'count' || unit === 'pinch') return diff === 0;
-  return diff <= Math.max(expected * 0.1, 0.13);
+  // The small absolute floor covers the reference's coarsest rounding step
+  // (1/4 oz, 1/4 cup); an unrounded value has no rounding step to cover.
+  return diff <= (exact ? expected * 0.1 : Math.max(expected * 0.1, 0.13));
 }
 
-function quantityMatches(expected: Quantity, predicted: Quantity, unit: USUnit): boolean {
-  if (typeof expected === 'number') {
-    return typeof predicted === 'number' && withinTolerance(expected, predicted, unit);
-  }
-  return (
-    typeof predicted !== 'number' &&
-    withinTolerance(expected.min, predicted.min, unit) &&
-    withinTolerance(expected.max, predicted.max, unit)
-  );
+function quantityClose(expected: Quantity, predicted: Quantity, unit: USUnit, exact: boolean): boolean {
+  const close = (e: number, p: number): boolean => withinTolerance(e, p, unit, { exact });
+  if (typeof expected === 'number') return typeof predicted === 'number' && close(expected, predicted);
+  return typeof predicted !== 'number' && close(expected.min, predicted.min) && close(expected.max, predicted.max);
+}
+
+/**
+ * Close to the rounded reference, or to the unrounded conversion. The second
+ * check stops the reference's own rounding from compounding with the tolerance
+ * (1.6 cups is the true value of 200 g flour; the reference says 1 2/3, and an
+ * answer of 1 1/2 is within 10 percent of the truth but not of 1 2/3).
+ */
+function quantityMatches(expected: Expected, predicted: Quantity): boolean {
+  if (quantityClose(expected.quantity, predicted, expected.unit, false)) return true;
+  return expected.exact !== undefined && quantityClose(expected.exact, predicted, expected.unit, true);
 }
 
 export interface CaseScore {
@@ -75,7 +85,7 @@ export function scoreCase(expected: Expected, predicted: ConvertedLine | undefin
   if (!predicted) return { quantity: false, unit: false, ingredient: false, pass: false };
   const unit = expected.unit === predicted.unit;
   // A quantity only counts as correct in the expected unit, so pass implies unit.
-  const quantity = unit && quantityMatches(expected.quantity, predicted.quantity, expected.unit);
+  const quantity = unit && quantityMatches(expected, predicted.quantity);
   const ingredient = ingredientMatches(expected.ingredient, predicted.ingredient);
   return { quantity, unit, ingredient, pass: quantity && ingredient };
 }

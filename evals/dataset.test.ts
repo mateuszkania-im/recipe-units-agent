@@ -17,6 +17,21 @@ describe('evals/dataset.jsonl', () => {
     expect(readFileSync(DATASET_PATH, 'utf8')).toBe(serializeDataset(buildDataset()));
   });
 
+  it('holds out every third case as a 20-case test split covering most tags', () => {
+    const test = rows.filter((r) => r.split === 'test');
+    expect(test).toHaveLength(20);
+    const testTags = new Set(test.flatMap((r) => r.tags));
+    // Only two length cases exist; both land in the tune split.
+    for (const tag of TAGS.filter((t) => t !== 'length')) expect(testTags.has(tag), tag).toBe(true);
+  });
+
+  it('records the unrounded value next to every rounded expectation', () => {
+    for (const row of rows) {
+      expect(row.expected.exact, row.id).toBeDefined();
+      expect(typeof row.expected.exact === 'number', row.id).toBe(typeof row.expected.quantity === 'number');
+    }
+  });
+
   it('covers every tag', () => {
     const used = new Set(rows.flatMap((r) => r.tags));
     for (const tag of TAGS) expect(used.has(tag), tag).toBe(true);
