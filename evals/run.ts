@@ -39,6 +39,8 @@ const list = (value: string | undefined, fallback: readonly string[]): string[] 
 
 function parseOptions() {
   const { values } = parseArgs({
+    // pnpm forwards the `--` separator, npm strips it
+    args: process.argv.slice(2).filter((arg) => arg !== '--'),
     options: {
       variant: { type: 'string' },
       model: { type: 'string' },

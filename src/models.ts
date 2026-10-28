@@ -18,7 +18,7 @@ const DEFAULTS: Record<'openrouter' | 'anthropic', Record<ModelTier, string>> = 
 type Env = Readonly<Record<string, string | undefined>>;
 
 export function hasModelCredentials(env: Env = process.env): boolean {
-  return Boolean(env.OPENROUTER_API_KEY ?? env.ANTHROPIC_API_KEY);
+  return Boolean(env.OPENROUTER_API_KEY || env.ANTHROPIC_API_KEY);
 }
 
 /** Accepts a tier ("cheap", "strong") or a full "provider/model" id. */

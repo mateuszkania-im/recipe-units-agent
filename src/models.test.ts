@@ -26,6 +26,11 @@ describe('hasModelCredentials', () => {
   it('is false with no keys', () => {
     expect(hasModelCredentials({})).toBe(false);
   });
+
+  it('ignores an empty key left over from .env.example', () => {
+    expect(hasModelCredentials({ OPENROUTER_API_KEY: '', ANTHROPIC_API_KEY: 'y' })).toBe(true);
+    expect(resolveModel('cheap', { OPENROUTER_API_KEY: '', ANTHROPIC_API_KEY: 'y' })).toMatch(/^anthropic\//);
+  });
 });
 
 describe('estimateCostUsd', () => {

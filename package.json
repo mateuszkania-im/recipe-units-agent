@@ -14,8 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "dataset:build": "tsx evals/build-dataset.ts",
-    "eval": "tsx evals/run.ts",
-    "eval:baseline": "tsx evals/run.ts --variant baseline",
+    "eval": "tsx --env-file-if-exists=.env evals/run.ts",
+    "eval:baseline": "tsx --env-file-if-exists=.env evals/run.ts --variant baseline",
     "eval:promptfoo": "npx --yes promptfoo@0.125.1 eval -c promptfooconfig.yaml"
   },
   "dependencies": {
