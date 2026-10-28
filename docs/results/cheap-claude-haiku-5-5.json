@@ -1,0 +1,512 @@
+[
+  {
+    "variant": "baseline",
+    "model": "anthropic/claude-haiku-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 0.9666666666666667,
+        "quantity": 0.9666666666666667,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 0.9444444444444444,
+          "quantity": 0.9444444444444444,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 0.9615384615384616,
+          "quantity": 0.9615384615384616,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 0.9722222222222222,
+          "quantity": 0.9722222222222222,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 0.9090909090909091,
+          "quantity": 0.9090909090909091,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 0.975,
+        "quantity": 0.975,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 0.95,
+        "quantity": 0.95,
+        "unit": 1,
+        "ingredient": 1
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 0.019653100000000003,
+    "latencyMs": {
+      "p50": 2418.537375,
+      "p95": 3456.1918330000008
+    },
+    "avgToolCalls": 0
+  },
+  {
+    "variant": "tools",
+    "model": "anthropic/claude-haiku-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 0.7666666666666667,
+        "quantity": 0.7666666666666667,
+        "unit": 0.7833333333333333,
+        "ingredient": 0.9833333333333333
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 0.9090909090909091,
+          "quantity": 0.9090909090909091,
+          "unit": 0.9090909090909091,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 0.2222222222222222,
+          "quantity": 0.2222222222222222,
+          "unit": 0.2777777777777778,
+          "ingredient": 0.9444444444444444
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 0.7307692307692307,
+          "quantity": 0.7307692307692307,
+          "unit": 0.7692307692307693,
+          "ingredient": 0.9615384615384616
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 0.6111111111111112,
+          "quantity": 0.6111111111111112,
+          "unit": 0.6388888888888888,
+          "ingredient": 0.9722222222222222
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 0.75,
+          "quantity": 0.75,
+          "unit": 0.75,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 0.775,
+        "quantity": 0.775,
+        "unit": 0.8,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 0.75,
+        "quantity": 0.75,
+        "unit": 0.75,
+        "ingredient": 0.95
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 0.04504020000000001,
+    "latencyMs": {
+      "p50": 3293.574084,
+      "p95": 6754.574915999998
+    },
+    "avgToolCalls": 0.9
+  },
+  {
+    "variant": "tools-policy",
+    "model": "anthropic/claude-haiku-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 0.9833333333333333,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 0.9833333333333333
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 0.9444444444444444,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 0.9444444444444444
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 0.9615384615384616,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 0.9615384615384616
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 0.9722222222222222,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 0.9722222222222222
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 0.95,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 0.95
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 0.04647030000000001,
+    "latencyMs": {
+      "p50": 3271.106500000009,
+      "p95": 4518.138291999989
+    },
+    "avgToolCalls": 0.85
+  },
+  {
+    "variant": "tools-density",
+    "model": "anthropic/claude-haiku-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 0.04872210000000002,
+    "latencyMs": {
+      "p50": 2965.519333000004,
+      "p95": 4143.931959000009
+    },
+    "avgToolCalls": 0.9166666666666666
+  },
+  {
+    "variant": "few-shot",
+    "model": "anthropic/claude-haiku-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 0.0553857,
+    "latencyMs": {
+      "p50": 2918.3622920000053,
+      "p95": 4218.887458000012
+    },
+    "avgToolCalls": 0.9166666666666666
+  }
+]

@@ -1,0 +1,512 @@
+[
+  {
+    "variant": "baseline",
+    "model": "anthropic/claude-sonnet-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 0.9166666666666666,
+        "quantity": 0.9166666666666666,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 0.8888888888888888,
+          "quantity": 0.8888888888888888,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 0.8461538461538461,
+          "quantity": 0.8461538461538461,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 0.9444444444444444,
+          "quantity": 0.9444444444444444,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 0.75,
+          "quantity": 0.75,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 0.7272727272727273,
+          "quantity": 0.7272727272727273,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 0.9,
+        "quantity": 0.9,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 0.95,
+        "quantity": 0.95,
+        "unit": 1,
+        "ingredient": 1
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 0.3417319999999999,
+    "latencyMs": {
+      "p50": 2558.2141659999998,
+      "p95": 4111.082459000001
+    },
+    "avgToolCalls": 0
+  },
+  {
+    "variant": "tools",
+    "model": "anthropic/claude-sonnet-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 0.95,
+        "quantity": 0.95,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 0.8333333333333334,
+          "quantity": 0.8333333333333334,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 0.9230769230769231,
+          "quantity": 0.9230769230769231,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 0.9166666666666666,
+          "quantity": 0.9166666666666666,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 0.95,
+        "quantity": 0.95,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 0.95,
+        "quantity": 0.95,
+        "unit": 1,
+        "ingredient": 1
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 0.7772339999999998,
+    "latencyMs": {
+      "p50": 3185.044624999995,
+      "p95": 6203.6687919999895
+    },
+    "avgToolCalls": 0.8833333333333333
+  },
+  {
+    "variant": "tools-policy",
+    "model": "anthropic/claude-sonnet-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 0.9666666666666667,
+        "quantity": 0.9666666666666667,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 0.8888888888888888,
+          "quantity": 0.8888888888888888,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 0.9444444444444444,
+          "quantity": 0.9444444444444444,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 0.95,
+        "quantity": 0.95,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 0.861604,
+    "latencyMs": {
+      "p50": 3082.2202499999985,
+      "p95": 5291.118833
+    },
+    "avgToolCalls": 0.8666666666666667
+  },
+  {
+    "variant": "tools-density",
+    "model": "anthropic/claude-sonnet-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 0.910212,
+    "latencyMs": {
+      "p50": 3017.361333000008,
+      "p95": 4450.0557499999995
+    },
+    "avgToolCalls": 0.9166666666666666
+  },
+  {
+    "variant": "few-shot",
+    "model": "anthropic/claude-sonnet-5-5",
+    "structuredOutput": "native",
+    "accuracy": {
+      "overall": {
+        "n": 60,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "byTag": {
+        "ambiguous": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "density": {
+          "n": 18,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "fraction": {
+          "n": 26,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "length": {
+          "n": 2,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "mass": {
+          "n": 36,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "no-conversion": {
+          "n": 5,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "range": {
+          "n": 4,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "temperature": {
+          "n": 6,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        },
+        "volume": {
+          "n": 11,
+          "pass": 1,
+          "quantity": 1,
+          "unit": 1,
+          "ingredient": 1
+        }
+      }
+    },
+    "bySplit": {
+      "tune": {
+        "n": 40,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      },
+      "test": {
+        "n": 20,
+        "pass": 1,
+        "quantity": 1,
+        "unit": 1,
+        "ingredient": 1
+      }
+    },
+    "errors": 0,
+    "totalCostUsd": 1.0448539999999995,
+    "latencyMs": {
+      "p50": 2918.345042000001,
+      "p95": 4096.717457999999
+    },
+    "avgToolCalls": 0.9166666666666666
+  }
+]
