@@ -32,23 +32,48 @@ export const DENSITY_TABLE: readonly DensityEntry[] = [
   { name: 'milk', gramsPerCup: 245, aliases: ['whole milk', 'semi-skimmed milk', 'milk'], measuredIn: 'cup' },
 ];
 
-function containsWords(text: string, phrase: string): boolean {
-  const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`(^|[^a-z])${escaped}($|[^a-z])`).test(text);
-}
+/**
+ * Words that describe the state, grade or packing of an ingredient without
+ * changing what it is. Only these may come before a matched alias, so
+ * "softened butter" is butter but "peanut butter" and "coconut milk" are not.
+ */
+const DESCRIPTORS = new Set([
+  'chilled', 'cold', 'cubed', 'dark', 'diced', 'extra', 'fine', 'finely', 'firmly', 'fresh', 'full-fat', 'golden',
+  'good', 'good-quality', 'hot', 'light', 'lightly', 'loosely', 'melted', 'old-fashioned', 'organic', 'packed', 'pure',
+  'room-temperature', 'semi-skimmed', 'sifted', 'skimmed', 'softened', 'strong', 'unbleached', 'unrefined', 'unsweetened',
+  'warm', 'white', 'whole',
+]);
 
 /**
- * Finds the entry whose longest alias appears in the text as whole words
- * (case-insensitive), so "butternut squash" does not match "butter".
+ * The words that name the ingredient itself: lowercased, without notes after
+ * a comma, a bracket or "for" ("butter, softened", "oats (rolled)", "flour
+ * for dusting"), without a
+ * leading measure such as "a knob of" and without amounts such as "250g".
+ */
+function ingredientWords(ingredient: string): string[] {
+  const core = ingredient.toLowerCase().split(/[,(]|\bfor\b/, 1)[0] ?? '';
+  const afterOf = core.split(/\bof\b/).pop() ?? '';
+  return afterOf.split(/\s+/).filter((word) => word !== '' && !/\d/.test(word));
+}
+
+const ALIAS_WORDS = DENSITY_TABLE.flatMap((entry) => entry.aliases.map((alias) => ({ entry, words: alias.split(' ') })));
+
+/**
+ * Finds the entry for an ingredient. An alias must end the ingredient's name,
+ * because in English the last word is the head noun ("milk chocolate" is
+ * chocolate), and any words before it must be descriptors. The longest such
+ * alias wins, so "self-raising flour" beats "flour". Words are compared
+ * whole, so "butternut squash" does not match "butter".
  */
 export function lookupDensity(ingredient: string): DensityEntry | undefined {
-  const text = ingredient.toLowerCase();
+  const words = ingredientWords(ingredient);
   let best: { entry: DensityEntry; length: number } | undefined;
-  for (const entry of DENSITY_TABLE) {
-    for (const alias of entry.aliases) {
-      if (containsWords(text, alias) && (!best || alias.length > best.length)) {
-        best = { entry, length: alias.length };
-      }
+  for (const { entry, words: alias } of ALIAS_WORDS) {
+    const start = words.length - alias.length;
+    if (start < 0 || (best && alias.length <= best.length)) continue;
+    const endsWithAlias = alias.every((word, i) => words[start + i] === word);
+    if (endsWithAlias && words.slice(0, start).every((word) => DESCRIPTORS.has(word))) {
+      best = { entry, length: alias.length };
     }
   }
   return best?.entry;

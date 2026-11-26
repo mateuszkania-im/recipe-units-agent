@@ -19,10 +19,15 @@ const SYNONYMS: readonly (readonly [RegExp, string])[] = [
 
 const STOPWORDS = new Set(['of', 'a', 'an', 'the', 'and', 'fresh', 'in']);
 
-/** Lowercase, apply synonyms and density-table names, drop stopwords and plurals. */
-export function normaliseIngredient(raw: string): Set<string> {
+function applySynonyms(raw: string): string {
   let text = raw.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '');
   for (const [pattern, replacement] of SYNONYMS) text = text.replace(pattern, replacement);
+  return text;
+}
+
+/** Lowercase, apply synonyms and density-table names, drop stopwords and plurals. */
+export function normaliseIngredient(raw: string): Set<string> {
+  let text = applySynonyms(raw);
   const canonical = lookupDensity(text)?.name;
   if (canonical) text = canonical;
   const tokens = text
@@ -33,8 +38,16 @@ export function normaliseIngredient(raw: string): Set<string> {
   return new Set(tokens);
 }
 
-/** Matches when one token set contains the other ("oats" vs "rolled oats"). */
+/**
+ * Matches when one token set contains the other ("oats" vs "rolled oats").
+ * If either side is a density-table ingredient, both must be the same entry,
+ * so a shared modifier or head word is not enough ("butter" vs "peanut
+ * butter", "milk" vs "coconut milk").
+ */
 export function ingredientMatches(expected: string, predicted: string): boolean {
+  const entryA = lookupDensity(applySynonyms(expected));
+  const entryB = lookupDensity(applySynonyms(predicted));
+  if (entryA || entryB) return entryA?.name === entryB?.name;
   const a = normaliseIngredient(expected);
   const b = normaliseIngredient(predicted);
   if (a.size === 0 || b.size === 0) return false;
