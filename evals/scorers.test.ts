@@ -30,6 +30,15 @@ describe('ingredientMatches', () => {
     expect(ingredientMatches('butter', 'butternut squash')).toBe(false);
     expect(ingredientMatches('chickpeas', 'chopped tomatoes')).toBe(false);
   });
+
+  it('does not match a density ingredient on a shared word', () => {
+    expect(ingredientMatches('butter', 'peanut butter')).toBe(false);
+    expect(ingredientMatches('peanut butter', 'butter')).toBe(false);
+    expect(ingredientMatches('milk', 'milk chocolate')).toBe(false);
+    expect(ingredientMatches('milk', 'coconut milk')).toBe(false);
+    expect(ingredientMatches('peanut butter', 'peanut butter')).toBe(true);
+    expect(ingredientMatches('unsalted butter', 'butter, softened')).toBe(true);
+  });
 });
 
 describe('withinTolerance', () => {
